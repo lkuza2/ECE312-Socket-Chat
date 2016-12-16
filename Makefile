@@ -1,6 +1,6 @@
 CC = gcc
 
-CFLAGS = -Wall -c -g
+CFLAGS = -Wall -c -g -std=gnu11
 
 ## A list of options to pass to the linker. 
 LDFLAGS = -Wall -g -pthread
