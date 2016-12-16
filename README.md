@@ -8,7 +8,7 @@ The server also recognizes the kill command "exit".  If a client, or the server 
 
 # Compiling
 
-Compiling is simple with Maven.  You will need Maven and the Java SDK 8 or above. From there, compiling to a runnable "executable" is as simple as "maven compiler:compile package".  A file will be created called socket-chat-server-1.0-SNAPSHOT-jar-with-dependencies.jar.
+Compiling is simple with Maven.  You will need Maven and the Java SDK 8 or above. From there, compiling to a runnable "executable" is as simple as "mvn compiler:compile package".  A file will be created called socket-chat-server-1.0-SNAPSHOT-jar-with-dependencies.jar.
 
 # Running
 To run, simply execute the JAR in the command line.  If you downloaded the release packages, "run-windows.bat" will work in windows, and "run-linux.sh" will work on Linux.  Linux users need to type "sh run-linux.sh".
