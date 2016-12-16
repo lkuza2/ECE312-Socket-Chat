@@ -12,18 +12,17 @@ import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.util.HashMap;
 import java.util.Scanner;
 
+
 /**
- * Created by kuzalj on 12/15/2016.
+ * Main utility class
  */
 public class MainUtil {
 
     private static MainUtil instance;
     private String localUsername;
     private int port;
-    private HashMap<Integer, String> connectedUsers = new HashMap<>();
     private EventLoopGroup bossGroup;
     private EventLoopGroup workerGroup;
     private ChannelGroup broadcast;
@@ -38,6 +37,9 @@ public class MainUtil {
         return instance;
     }
 
+    /**
+     * Initial run method
+     */
     public void run() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome to Java Socket Chat Server v1.00");
@@ -46,6 +48,7 @@ public class MainUtil {
         System.out.println("Please Enter a Username: ");
         setLocalUsername(scanner.next());
 
+        // This gets the current IP of the host
         try {
             URL whatismyip = new URL("http://checkip.amazonaws.com");
             BufferedReader in = new BufferedReader(new InputStreamReader(
@@ -65,11 +68,17 @@ public class MainUtil {
         handleCommands(scanner);
     }
 
-    public void handleCommands(Scanner scanner) {
+    /**
+     * This handles data that is typed in by the user on the server side, and sends that data to clients
+     *
+     * @param scanner System.in scanner
+     */
+    private void handleCommands(Scanner scanner) {
         String command;
         while (!(command = scanner.nextLine()).equals("escape")) {
             switch (command.trim()) {
                 case "exit":
+                    scanner.close();
                     exit();
                     break;
                 case "":
@@ -82,6 +91,9 @@ public class MainUtil {
         }
     }
 
+    /**
+     * Prints the <username> cursor to the console
+     */
     public void printCursor() {
         System.out.print("<" + getLocalUsername() + ">");
     }
@@ -96,6 +108,9 @@ public class MainUtil {
         }
     }
 
+    /**
+     * Exits gracefully
+     */
     public void exit() {
         sendData("exit", null);
         getBossGroup().shutdownGracefully();
@@ -103,19 +118,19 @@ public class MainUtil {
         System.exit(0);
     }
 
-    public String getLocalUsername() {
+    private String getLocalUsername() {
         return localUsername;
     }
 
-    public void setLocalUsername(String localUsername) {
+    private void setLocalUsername(String localUsername) {
         this.localUsername = localUsername;
     }
 
-    public int getPort() {
+    private int getPort() {
         return port;
     }
 
-    public void setPort(int port) {
+    private void setPort(int port) {
         this.port = port;
     }
 

@@ -12,9 +12,6 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.util.concurrent.GlobalEventExecutor;
 
-/**
- * Created by kuzalj on 12/15/2016.
- */
 public class MainServer implements Runnable {
 
     private int port;
